@@ -1,0 +1,257 @@
+<!doctype html><html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff7a90"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="우리반 학습마당">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net"><link href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquareRound@1.0/nanumsquareround.css" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<title>우리반 스마트 학습마당</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6fb;color:#182033;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif}
+button,input{font:inherit}.wrap{max-width:1450px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.brand{display:flex;gap:12px;align-items:center}.logo{width:52px;height:52px;border-radius:17px;background:linear-gradient(135deg,#5b5ce2,#8b5cf6);display:grid;place-items:center;color:#fff;font-size:26px;box-shadow:0 8px 25px #5b5ce233}h1{margin:0;font-size:22px}.sub{font-size:13px;color:#70798b;margin-top:3px}.actions{display:flex;gap:7px}.btn{border:1px solid #e1e5ee;background:#fff;border-radius:11px;padding:9px 12px}.primary{background:#5b5ce2;color:#fff;border-color:#5b5ce2}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:15px}.card{background:#fff;border:1px solid #e6e9f0;border-radius:19px;box-shadow:0 8px 26px #1f29370b}.student{padding:16px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.student strong{font-size:20px}.student small{display:block;color:#778092;margin-top:3px}.date{font-size:12px;color:#8a93a3}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:15px}.panel{padding:17px;min-height:220px}.panel h2,.section h2,.learn h2,.side h2{font-size:16px;margin:0 0 12px}.tabs{display:flex;gap:6px;margin-bottom:9px}.tab{border:0;background:#f1f3f8;border-radius:9px;padding:7px 11px}.tab.on{background:#ececff;color:#4f46e5;font-weight:700}.empty{text-align:center;color:#8a93a3;padding:28px 5px;font-size:13px;line-height:1.7}
+.menu{display:flex;flex-direction:column}.dish{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:7px 2px;border-bottom:1px dashed #eef0f5;font-size:14px}.dish:last-child{border-bottom:0}.dish-name{font-weight:600;color:#243350}.dish-allergy{font-size:10px;color:#a6adba;white-space:nowrap;flex-shrink:0}
+.period{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid #f0f1f5;font-size:14px}.period:last-child{border-bottom:0}.period .num{flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:#ececff;color:#4f46e5;display:grid;place-items:center;font-weight:700;font-size:12px}.period .subj{flex:1;line-height:1.4;word-break:keep-all}
+.status{font-size:11px;color:#9aa2af;margin-top:9px}
+.sections{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:15px}.section{padding:17px;min-height:330px}.section{overflow:hidden}.list{display:grid;gap:8px}.schoolList{display:grid;gap:8px}.schoolItem{display:block;text-decoration:none;color:inherit;background:#f8f9fc;border-radius:11px;padding:10px 11px;border:1px solid #eef0f4}.schoolItem:hover{background:#f1f3ff}.schoolItem b{display:block;font-size:13px;line-height:1.45}.schoolItem span{font-size:11px;color:#7d8797}.liveNote{font-size:10px;color:#8b93a2;margin-top:8px}.refreshBtn{border:0;background:#f0efff;color:#514fe0;border-radius:8px;padding:5px 8px;font-size:10px;cursor:pointer;float:right}.item{display:block;text-decoration:none;color:inherit;background:#f8f9fc;border-radius:11px;padding:10px 11px}.item b{display:block;font-size:13px}.item span{font-size:11px;color:#7d8797}.more{display:block;text-align:right;margin-top:9px;color:#514fe0;text-decoration:none;font-size:11px}
+.learn{padding:17px;margin-bottom:15px}.learnGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.learnGrid a,.tools a{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit;border:1px solid #e9ebf1;border-radius:13px;padding:12px}.ico{width:34px;height:34px;border-radius:10px;background:#eef0ff;display:grid;place-items:center;font-size:18px}.learnGrid span:last-child,.tools span:last-child{font-size:13px;font-weight:650}.side{padding:17px;height:max-content;position:sticky;top:12px}.tools{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tools a,.tools label{padding:9px}.tools label{display:flex;align-items:center;gap:9px;border:1px solid #e9ebf1;border-radius:13px}.tools .ico{width:29px;height:29px;font-size:15px}.hint{margin-top:13px;padding:12px;background:#f7f8fc;border-radius:12px;color:#7b8494;font-size:11px;line-height:1.65}.foot{text-align:center;color:#9ba2ae;font-size:10px;padding:7px}
+.modal{display:none;position:fixed;inset:0;background:#11182788;z-index:50;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.dialog{width:min(430px,100%);background:#fff;border-radius:22px;padding:23px;box-shadow:0 25px 80px #0003}.dialog h2{margin:0 0 5px}.dialog p{font-size:12px;color:#7a8392;line-height:1.6}.form{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:11px;color:#737c8c}.field input{padding:11px;border:1px solid #dfe3eb;border-radius:10px;outline:0}.save{width:100%;border:0;background:#5b5ce2;color:#fff;border-radius:11px;padding:12px;margin-top:13px;font-weight:700}
+@media(max-width:1050px){.layout{grid-template-columns:1fr}.side{position:static}}@media(max-width:720px){.wrap{padding:9px}.cards,.sections{grid-template-columns:1fr}.learnGrid{grid-template-columns:repeat(2,1fr)}.actions .btn:first-child{display:none}.student strong{font-size:17px}}
+
+/* ===== 초등학생용 귀여운 테마 (디자인만 변경) ===== */
+:root{--ink:#3a2d4d;--muted:#8a7ba0}
+html{-webkit-tap-highlight-color:transparent}
+body{font-family:"NanumSquareRound","Gowun Dodum","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;color:var(--ink);background-color:#fff8e7;
+ background-image:radial-gradient(#ffe2a8 2.2px,transparent 2.4px),radial-gradient(#ffd0dc 2px,transparent 2.2px);background-size:34px 34px,34px 34px;background-position:0 0,17px 17px;
+ overscroll-behavior:none;-webkit-user-select:none;user-select:none;letter-spacing:-.2px;line-height:1.5}
+input{-webkit-user-select:text;user-select:text}
+.wrap{padding:calc(18px + env(safe-area-inset-top)) calc(18px + env(safe-area-inset-right)) calc(18px + env(safe-area-inset-bottom)) calc(18px + env(safe-area-inset-left))}
+body::before,body::after{position:fixed;z-index:0;pointer-events:none;font-size:34px;opacity:.55}
+body::before{content:"☁️";right:4%;top:70px;animation:floaty 6s ease-in-out infinite}
+body::after{content:"⭐";left:2%;bottom:16px;animation:floaty 5s ease-in-out infinite reverse}
+.wrap{position:relative;z-index:1}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(6deg)}}
+@keyframes wiggle{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes popin{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+
+h1{font-size:26px;font-weight:800;color:#ff5c7a;text-shadow:2px 2px 0 #ffe0e6}
+.sub{color:var(--muted);font-size:14px}
+.logo{width:62px;height:62px;border-radius:22px;background:linear-gradient(135deg,#ff7a90,#ffb347);box-shadow:0 6px 0 #e0566f;font-size:32px;animation:wiggle 3.2s ease-in-out infinite}
+.btn{border:3px solid #ffd0dc;background:#fff;color:#e0566f;border-radius:999px;padding:11px 18px;font-size:15px;box-shadow:0 4px 0 #ffd0dc;transition:transform .12s,box-shadow .12s}
+.primary{background:linear-gradient(135deg,#ff7a90,#ffa45c);border-color:#e0566f;color:#fff;box-shadow:0 4px 0 #e0566f}
+.btn:active,.save:active,.tab:active,.refreshBtn:active{transform:translateY(3px);box-shadow:0 1px 0 #ffd0dc}
+
+/* 카드: 스티커 느낌 */
+.card{--c:#7c8cff;background:#fff;border:3px solid var(--c);border-radius:28px;box-shadow:0 7px 0 var(--c);animation:popin .5s both}
+.student{--c:#ffc93c;background:linear-gradient(135deg,#fff6cf,#ffeaa0)}
+.student strong{font-size:24px;font-weight:800;color:#c26a00}
+.student small{color:#b98a3a;font-size:14px}
+.date{color:#b98a3a;font-size:13px}
+.cards .panel:nth-child(1){--c:#ff7a90;animation-delay:.05s}.cards .panel:nth-child(2){--c:#4dabf7;animation-delay:.12s}.cards .panel:nth-child(3){--c:#3ddbb0;animation-delay:.19s}
+.sections .section:nth-child(1){--c:#ffa94d;animation-delay:.1s}.sections .section:nth-child(2){--c:#9775fa;animation-delay:.17s}.sections .section:nth-child(3){--c:#f783ac;animation-delay:.24s}
+.learn{--c:#4dabf7;animation-delay:.2s}.side{--c:#9775fa;animation-delay:.1s}
+.panel h2,.section h2,.learn h2,.side h2{font-size:21px;font-weight:800;color:color-mix(in srgb,var(--c) 72%,#000);margin-bottom:14px}
+.layout,.cards,.sections{gap:20px}.cards,.sections,.learn{margin-bottom:20px}.student{margin-bottom:20px}
+
+/* 탭 · 버튼 */
+.tab{background:color-mix(in srgb,var(--c) 14%,#fff);color:color-mix(in srgb,var(--c) 70%,#000);border-radius:999px;padding:9px 18px;font-size:15px;box-shadow:0 3px 0 color-mix(in srgb,var(--c) 30%,#fff);transition:transform .12s}
+.tab.on{background:var(--c);color:#fff;box-shadow:0 3px 0 color-mix(in srgb,var(--c) 65%,#000);font-weight:800}
+.refreshBtn{background:color-mix(in srgb,var(--c) 15%,#fff);color:color-mix(in srgb,var(--c) 70%,#000);border-radius:999px;padding:7px 12px;font-size:12px;font-family:inherit}
+.save{background:linear-gradient(135deg,#ff7a90,#ffa45c);border-radius:999px;padding:15px;font-size:18px;font-weight:800;box-shadow:0 5px 0 #e0566f;transition:transform .12s}
+
+/* 급식 · 시간표 */
+.dish{font-size:16px;padding:9px 4px;border-bottom:2px dotted color-mix(in srgb,var(--c) 30%,#fff)}
+.dish-name{font-weight:800;color:var(--ink)}
+.dish-allergy{font-size:11px;color:#b3a6c5;background:#f6f1fb;border-radius:999px;padding:2px 8px}
+.status{font-size:12px;color:var(--muted);margin-top:10px;background:#fff4f6;border-radius:999px;padding:5px 12px;display:inline-block}
+.period{font-size:16px;padding:9px 4px;border-bottom:2px dotted color-mix(in srgb,var(--c) 30%,#fff)}
+.period .num{flex:0 0 34px;width:34px;height:34px;font-size:16px;background:var(--c);color:#fff;box-shadow:0 3px 0 color-mix(in srgb,var(--c) 65%,#000)}
+.empty{font-size:15px;color:var(--muted)}
+
+/* 목록 카드 */
+.schoolItem,.item{background:color-mix(in srgb,var(--c) 9%,#fff);border:2px solid color-mix(in srgb,var(--c) 28%,#fff);border-left:8px solid var(--c);border-radius:18px;padding:12px 14px;transition:transform .12s,background .12s}
+.schoolItem:hover{background:color-mix(in srgb,var(--c) 15%,#fff)}
+.schoolItem:active,.item:active{transform:scale(.97)}
+.schoolItem b{font-size:15px;font-weight:800;line-height:1.5;color:var(--ink)}
+.schoolItem span,.item span{font-size:12px;color:var(--muted)}
+.liveNote{font-size:11px;color:#b3a6c5}
+.more{color:color-mix(in srgb,var(--c) 75%,#000);font-size:13px}
+
+/* 바로 배우기 · 수업 도구: 알록달록 버튼 */
+.learnGrid{gap:12px}.tools{gap:11px}
+.learnGrid a,.tools a,.tools label{background:#fff;border:3px solid color-mix(in srgb,var(--c) 30%,#fff);border-radius:22px;padding:11px;box-shadow:0 4px 0 color-mix(in srgb,var(--c) 30%,#fff);transition:transform .12s,box-shadow .12s}
+.learnGrid a:active,.tools a:active,.tools label:active{transform:translateY(4px);box-shadow:0 0 0 transparent}
+.learnGrid span:last-child,.tools span:last-child{font-size:15px;font-weight:800}
+.ico{width:42px;height:42px;border-radius:15px;font-size:22px}
+.tools .ico{width:38px;height:38px;font-size:20px}
+.learnGrid a:nth-child(6n+1) .ico,.tools>:nth-child(6n+1) .ico{background:#ffe0e6}
+.learnGrid a:nth-child(6n+2) .ico,.tools>:nth-child(6n+2) .ico{background:#d9edff}
+.learnGrid a:nth-child(6n+3) .ico,.tools>:nth-child(6n+3) .ico{background:#d3f7ea}
+.learnGrid a:nth-child(6n+4) .ico,.tools>:nth-child(6n+4) .ico{background:#ffefc9}
+.learnGrid a:nth-child(6n+5) .ico,.tools>:nth-child(6n+5) .ico{background:#eadfff}
+.learnGrid a:nth-child(6n+6) .ico,.tools>:nth-child(6n+6) .ico{background:#ffdcec}
+.hint{background:#fff6cf;border:2px dashed #ffc93c;border-radius:18px;color:#a67a1c;font-size:12px}
+.foot{color:#b3a6c5;font-size:12px}
+
+/* 학생 정보 창 */
+.modal{background:#3a2d4d99}
+.dialog{border:4px solid #ffc93c;border-radius:30px;box-shadow:0 9px 0 #ffc93c}
+.dialog h2{font-size:26px;font-weight:800;color:#ff5c7a}
+.dialog p{font-size:14px;color:var(--muted)}
+.field label{font-size:13px;color:var(--muted)}
+.field input{border:3px solid #ffe0a8;border-radius:16px;padding:13px;font-size:17px;background:#fffdf5}
+.field input:focus{border-color:#ff7a90}
+.tools{grid-template-columns:repeat(2,minmax(0,1fr))}.tools>*{min-width:0}.tools span:last-child{font-size:14px;min-width:0;overflow-wrap:anywhere;line-height:1.25}
+.tools a,.tools label{padding:9px}.side{overflow:hidden}
+body::before{right:24%;top:12px}
+.layout{grid-template-columns:minmax(0,1fr) 330px}
+.tools a,.tools label{gap:6px;padding:8px;border-width:2.5px}.tools .ico{width:32px;height:32px;font-size:17px;flex:0 0 32px;border-radius:12px}
+.tools span:last-child{font-size:13.5px;overflow-wrap:normal;word-break:keep-all}
+@media(max-width:1050px){.layout{grid-template-columns:1fr}}
+
+/* 글씨체 가독성 보정 (둥근 고딕) */
+.dish-name,.schoolItem b,.learnGrid span:last-child,.tools span:last-child{font-weight:700}
+.dish{font-size:15.5px}.period{font-size:15.5px}.schoolItem b{font-size:14.5px}
+.schoolItem span,.item span,.sub,.liveNote,.status,.hint{font-weight:400}
+.tab,.btn,.refreshBtn{font-weight:700}
+.tools span:last-child{font-size:13px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:720px){h1{font-size:22px}.logo{width:50px;height:50px}}
+</style></head><body><div class="wrap">
+<header class="top"><div class="brand"><div class="logo">📚</div><div><h1>우리반 스마트 학습마당</h1><div class="sub">청미르초등학교 · 태블릿 학생용</div></div></div>
+<div class="actions"><button class="btn" onclick="openStudent()">⚙ 학생 정보</button><button class="btn primary" onclick="loadAll()">↻ 새로고침</button></div></header>
+<div class="layout"><main>
+<div class="card student"><div><strong id="studentName">학생 정보를 입력해주세요</strong><small id="studentMeta">처음 실행할 때 학년·반·번호·이름을 입력합니다.</small></div><div id="updated" class="date"></div></div>
+<div class="cards">
+<div class="card panel"><h2>🍚 오늘·내일 급식</h2><div class="tabs"><button class="tab on" onclick="mealTab(0,this)">오늘</button><button class="tab" onclick="mealTab(1,this)">내일</button></div><div id="meal"><div class="empty">불러오는 중…</div></div></div>
+<div class="card panel"><h2>📚 오늘·내일 시간표</h2><div class="tabs"><button class="tab on" onclick="timeTab(0,this)">오늘</button><button class="tab" onclick="timeTab(1,this)">내일</button></div><div id="time"><div class="empty">불러오는 중…</div></div></div>
+<div class="card panel"><h2>📖 학습자료</h2><div id="trendList" class="schoolList"><div class="schoolItem"><b>에듀넷 학습자료</b><span>목록을 불러오는 중…</span></div></div><div class="liveNote">제목을 목록으로 표시합니다. 제목을 누르면 에듀넷 학습자료 페이지로 이동합니다.</div><a class="more" target="_blank" rel="noopener" href="https://www.edunet.net/contsMvGllry/list/152">학습자료 전체보기 →</a></div></div>
+<div class="sections">
+<div class="card section"><h2>📢 공지사항 <button class="refreshBtn" onclick="refreshSchoolLists()">↻ 새로고침</button></h2><div id="noticeList" class="schoolList"></div><div class="liveNote">학교 홈페이지 최신 게시글 기준 · 제목을 누르면 원문으로 이동합니다.</div><a class="more" target="_blank" rel="noopener" href="https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8645&mi=13423">공지사항 전체 보기 →</a></div>
+<div class="card section"><h2>📨 가정통신문</h2><div id="letterList" class="schoolList"></div><div class="liveNote">학교 홈페이지 최신 게시글 기준 · 제목을 누르면 원문으로 이동합니다.</div><a class="more" target="_blank" rel="noopener" href="https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8665&mi=13450">가정통신문 전체 보기 →</a></div>
+<div class="card section"><h2>🗓️ 이달의 행사일정 <span id="scheduleMonth" style="font-size:12px;color:#7d8797;font-weight:500"></span></h2><div id="scheduleList" class="schoolList"></div><div class="liveNote">현재 달의 행사만 표시합니다. 최신 변경 사항은 학교 공식 일정에서 확인하세요.</div><a class="more" target="_blank" rel="noopener" href="https://cheongmireu-e.goepj.kr/cheongmireu-e/ps/schdul/selectSchdulMainList.do?mi=13452">학교 일정 전체 보기 →</a></div></div>
+<div class="card learn"><h2>🎓 바로 배우기</h2><div class="learnGrid">
+<a target="_blank" href="https://primary.ebs.co.kr/"><span class="ico">📺</span><span>EBS 초등</span></a><a target="_blank" href="https://hi.goe.go.kr/"><span class="ico">💻</span><span>하이러닝</span></a><a target="_blank" href="http://w.11math.com/"><span class="ico">➗</span><span>일일수학</span></a><a target="_blank" href="https://www.scienceall.com/"><span class="ico">🔬</span><span>사이언스올</span></a><a target="_blank" href="https://www.nlcy.go.kr/"><span class="ico">📖</span><span>국립어린이청소년도서관</span></a><a target="_blank" href="https://read365.edunet.net/"><span class="ico">📚</span><span>독서로</span></a></div></div>
+</main><aside class="card side"><h2>🧰 수업 도구</h2><div class="tools">
+<a target="_blank" href="https://www.canva.com/"><span class="ico">🎨</span><span>Canva</span></a><a target="_blank" href="https://padlet.com/"><span class="ico">🧱</span><span>Padlet</span></a><a target="_blank" href="https://www.tkbell.co.kr/"><span class="ico">🔔</span><span>띵커벨</span></a><a target="_blank" href="https://kahoot.com/"><span class="ico">❓</span><span>Kahoot</span></a><a target="_blank" href="https://www.capcut.com/"><span class="ico">🎬</span><span>CapCut</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=jp.ne.ibis.ibispaintx.app;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Djp.ne.ibis.ibispaintx.app;end"><span class="ico">🖌</span><span>ibisPaint X</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.noctuasoftware.stellarium;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fsearch%3Fq%3Dstellarium%26c%3Dapps%26hl%3Dko;end"><span class="ico">🌌</span><span>Stellarium</span></a><a target="_blank" href="https://radio.garden/"><span class="ico">🌍</span><span>Radio Garden</span></a><a target="_blank" href="https://www.blooket.com/"><span class="ico">📝</span><span>블루킷</span></a><a target="_blank" href="https://quizn.show/"><span class="ico">🧩</span><span>퀴즈앤</span></a><a target="_blank" href="https://www.cateater.com/stopmotionstudio/"><span class="ico">🎞</span><span>Stop Motion</span></a><a target="_blank" href="https://www.autodesk.com/products/tinkercad/overview"><span class="ico">⚙</span><span>Tinkercad</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.bluegreen.mce;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.bluegreen.mce%26hl%3Dko;end"><span class="ico">🎒</span><span>수페클래스</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.sec.penup;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.sec.penup;end"><span class="ico">✏️</span><span>PENUP</span></a><a target="_blank" rel="noopener" href="https://tooning.io/"><span class="ico">🎨</span><span>투닝</span></a><a target="_blank" rel="noopener" href="https://www.onlinepianist.com/virtual-piano"><span class="ico">🎹</span><span>실시간 피아노</span></a><a target="_blank" href="https://www.google.com/"><span class="ico">🌐</span><span>구글크롬</span></a><label style="cursor:pointer"><input type="file" accept="image/*" capture="environment" style="display:none" onchange="this.value=''"><span class="ico">📷</span><span>QR코드확인</span></label><a target="_blank" rel="noopener" href="https://onmusil.gyo6.net/apps/thread/fLKVLMwf"><span class="ico">🌱</span><span>온실이</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=kr.go.goe.gaide.mobile;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dkr.go.goe.gaide.mobile%26hl%3Dko%26pli%3D1;end"><span class="ico">🙋</span><span>지원이</span></a></div>
+<div class="hint">📱 태블릿 홈 화면에 추가하면 앱처럼 사용할 수 있습니다.<br>학교 홈페이지의 최신 공지·가정통신문·일정을 카드로 확인합니다.<br>학생 정보는 이 태블릿의 브라우저에 저장됩니다.<br>다른 학생이 사용하면 ⚙ 학생 정보에서 변경하세요.</div></aside></div>
+<div class="foot">청미르초등학교 · 우리반 스마트 학습마당 · by willard.au</div></div>
+<div id="modal" class="modal"><div class="dialog"><h2>👋 학생 정보 입력</h2><p>이 태블릿을 사용하는 학생 정보를 입력하세요. 한 번 저장하면 다음 실행부터 자동으로 표시됩니다.</p><div class="form"><div class="field"><label>학년</label><input id="grade" type="number" min="1" max="6" placeholder="5"></div><div class="field"><label>반</label><input id="classNo" type="number" min="1" max="99" placeholder="3"></div><div class="field"><label>번호</label><input id="studentNo" type="number" min="1" max="99" placeholder="12"></div><div class="field full"><label>이름</label><input id="name" maxlength="20" placeholder="홍길동"></div></div><button class="save" onclick="saveStudent()">저장하고 시작하기</button></div></div>
+<script>
+const SCHOOL={name:"청미르초등학교",educationOfficeCode:"J10",schoolCode:"7681234",home:"https://cheongmireu-e.goepj.kr/cheongmireu-e/main.do",notice:"https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8645&mi=13423",letter:"https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8665&mi=13450",schedule:"https://cheongmireu-e.goepj.kr/cheongmireu-e/ps/schdul/selectSchdulMainList.do?mi=13452",mealBoard:"https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8667&mi=13455"};
+const NEIS_KEYS=["16aaf7cd96564fa984c1a4c23c2e27f8","8c3c2473f463471abacc0ce8e19c1215"];let student=JSON.parse(localStorage.getItem("classStudent")||"null"),meals=[[],[]],times=[[],[]],lastNeisError="";const $=id=>document.getElementById(id);
+function ymd(n=0){let d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10).replaceAll("-","")}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function openStudent(){if(student){$("grade").value=student.grade;$("classNo").value=student.classNo;$("studentNo").value=student.studentNo;$("name").value=student.name}$("modal").classList.add("show")}
+function saveStudent(){let grade=$("grade").value.trim(),classNo=$("classNo").value.trim(),studentNo=$("studentNo").value.trim(),name=$("name").value.trim();if(!grade||!classNo||!studentNo||!name){alert("모든 항목을 입력해주세요.");return}student={grade,classNo,studentNo,name};localStorage.setItem("classStudent",JSON.stringify(student));$("modal").classList.remove("show");renderStudent();loadAll()}
+function renderStudent(){if(!student){$("studentName").textContent="학생 정보를 입력해주세요";$("studentMeta").textContent="처음 실행할 때 학년·반·번호·이름을 입력합니다.";openStudent();return}$("studentName").textContent=`${student.grade}학년 ${student.classNo}반 ${student.name}`;$("studentMeta").textContent=`${student.studentNo}번 · ${SCHOOL.name}`}
+async function neis(path,p){let lastErr;for(const key of NEIS_KEYS){try{let u=new URL("https://open.neis.go.kr/hub/"+path);u.searchParams.set("KEY",key);u.searchParams.set("Type","json");u.searchParams.set("pIndex","1");u.searchParams.set("pSize","100");Object.entries(p).forEach(([k,v])=>u.searchParams.set(k,v));let r;try{r=await fetch(u)}catch(netErr){throw Error("CORS_OR_NETWORK")}if(!r.ok)throw Error("HTTP_"+r.status);let d=await r.json();const topCode=d?.RESULT?.CODE;if(topCode&&topCode.startsWith("ERROR"))throw Error(topCode+" "+(d.RESULT.MESSAGE||""));return d}catch(e){lastErr=e;continue}}throw lastErr||Error("NEIS 조회 실패")}
+function rows(d,k){return Array.isArray(d?.[k])&&d[k][1]?.row?d[k][1].row:[]}
+function semOf(d){const m=d.getMonth()+1;return m>=3&&m<=8?"1":"2"}
+function demoMeal(n){return[{DDISH_NM:n?"내일 급식 정보가 없습니다.":"오늘 급식 정보가 없습니다."}]}
+function demoTime(){return[{PERIO:1,ITRT_CNTNT:"등록된 시간표가 없습니다."}]}
+async function loadNeis(){if(!NEIS_KEYS.length){meals=[demoMeal(0),demoMeal(1)];times=[demoTime(),demoTime()];$("updated").textContent="NEIS 키 입력 대기";return}try{let c={ATPT_OFCDC_SC_CODE:SCHOOL.educationOfficeCode,SD_SCHUL_CODE:SCHOOL.schoolCode};let now=new Date();let [m0,m1,t0,t1]=await Promise.all([neis("mealServiceDietInfo",{...c,MLSV_YMD:ymd(0)}),neis("mealServiceDietInfo",{...c,MLSV_YMD:ymd(1)}),neis("elsTimetable",{...c,AY:now.getFullYear(),SEM:semOf(now),ALL_TI_YMD:ymd(0),GRADE:student.grade,CLASS_NM:student.classNo}),neis("elsTimetable",{...c,AY:now.getFullYear(),SEM:semOf(now),ALL_TI_YMD:ymd(1),GRADE:student.grade,CLASS_NM:student.classNo})]);meals=[rows(m0,"mealServiceDietInfo"),rows(m1,"mealServiceDietInfo")];times=[rows(t0,"elsTimetable"),rows(t1,"elsTimetable")];lastNeisError="";$("updated").textContent="NEIS 자동 갱신 · "+new Date().toLocaleTimeString("ko-KR",{hour:"2-digit",minute:"2-digit"})}catch(e){let msg=e?.message||"";let reason=msg==="CORS_OR_NETWORK"?"NEIS 접속 차단(네트워크/CORS)":msg.startsWith("HTTP_")?"NEIS 서버 응답 오류("+msg.slice(5)+")":msg?"NEIS 오류: "+msg:"NEIS 연결 확인 필요";lastNeisError=reason;$("updated").textContent=reason;meals=[demoMeal(0),demoMeal(1)];times=[demoTime(),demoTime()]}}
+function renderDish(line){const m=line.match(/^(.*?)\s*\(([\d.\s]+)\)\s*$/);if(m)return `<div class="dish"><span class="dish-name">${esc(m[1].trim())}</span><span class="dish-allergy">${esc(m[2].trim())}</span></div>`;return `<div class="dish"><span class="dish-name">${esc(line)}</span></div>`}
+function mealTab(i,b){b.parentElement.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");let r=meals[i]||[];$("meal").innerHTML=r.length?r.map(x=>{const lines=String(x.DDISH_NM||"").split(/<br\s*\/?>/i).map(s=>s.trim()).filter(Boolean);return `<div class="menu">${lines.map(renderDish).join("")}</div>${x.CAL_INFO?`<div class="status">${esc(x.CAL_INFO)}</div>`:""}`}).join(""):`<div class="empty">등록된 급식 정보가 없습니다.${lastNeisError?`<br><span style="color:#c0392b">${esc(lastNeisError)}</span>`:""}</div>`}
+function timeTab(i,b){b.parentElement.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");let r=times[i]||[];$("time").innerHTML=r.length?r.sort((a,b)=>+a.PERIO-+b.PERIO).map(x=>`<div class="period"><span class="num">${esc(x.PERIO)}</span><span class="subj">${esc(x.ITRT_CNTNT)}</span></div>`).join(""):`<div class="empty">등록된 시간표가 없습니다.${lastNeisError?`<br><span style="color:#c0392b">${esc(lastNeisError)}</span>`:""}</div>`}
+async function loadAll(){renderStudent();if(!student)return;await loadNeis();mealTab(0,$("#meal").parentElement.querySelector(".tab"));timeTab(0,$("#time").parentElement.querySelector(".tab"))}
+const SCHOOL_CONTENT={
+ notice:[
+  ["2026학년도 2차 도서 구입 예정 목록","2026.09.07","https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttInfo.do?bbsId=8645&mi=13423"],
+  ["청미르초등학교 학생생활규정 공고","2026.07.22","https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttInfo.do?bbsId=8645&mi=13423"],
+  ["2026학년도 여름방학 안내문","2026.07.20","https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttInfo.do?bbsId=8645&mi=13423"]
+ ],
+ letter:[
+  ["2026학년도 학부모회 임원선출관리위원 추가 모집 안내","2026.09.14","https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttInfo.do?bbsId=8665&mi=13450"],
+  ["2026 하반기 불법찬조금 근절 안내","2026.08.26","https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttInfo.do?bbsId=8665&mi=13450"],
+  ["학생생활규정 개정 안내문","2026.07.22","https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttInfo.do?bbsId=8665&mi=13450"]
+ ],
+ material:[
+  // 아래 형식으로 제목·링크를 채워주시면 학습자료 카드에 그대로 표시됩니다 (최대 5개).
+  // ["카드 제목","https://www.edunet.net/... 개별 링크"],
+ ],
+ schedule:[
+  // 아래 형식으로 이달의 행사를 채워주시면 표시됩니다. "토요휴업일"이 제목에 포함된 항목은 자동으로 숨겨집니다.
+  // ["행사명","날짜","https://cheongmireu-e.goepj.kr/... 링크(선택, 없으면 SCHOOL.schedule로 연결)"],
+  ["추석 연휴","2026.09.24–09.26",""]
+ ]
+};
+function renderSchoolList(id,items){const el=$(id);el.innerHTML=items.map(x=>`<a class="schoolItem" target="_blank" rel="noopener" href="${x[2]}"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></a>`).join("")}
+
+async function loadEdunetTrends(){
+  const el=$("trendList");
+  const boardUrl="https://www.edunet.net/contsMvGllry/list/152";
+  const NAV_BLACKLIST=["바로가기","외부링크","페이스북","트위터","인스타그램","유튜브","카카오","네이버","로그인","회원가입","아이디","비밀번호","사이트맵","전체메뉴","검색결과","디지털교과서","모두의한국어","이용약관","개인정보","고객센터","찾아오시는","패밀리사이트","즐겨찾기","공지사항","자주찾는","새창","홈으로","상단으로","맨위로"];
+  try{
+    // 이 사이트는 자바스크립트로 카드를 그리는 페이지라 일반 fetch로는 읽을 수 없어,
+    // 페이지를 렌더링해 텍스트로 변환해주는 공개 리더(r.jina.ai)를 통해 시도합니다.
+    const response=await fetch("https://r.jina.ai/"+boardUrl,{mode:"cors"});
+    if(!response.ok) throw Error("리더 응답 오류");
+    const text=await response.text();
+    const linkRe=/\[([^\]]{6,})\]\((https?:\/\/[^\s)]*edunet\.net[^\s)]*)\)/g;
+    const seen=new Map();
+    let mm;
+    while((mm=linkRe.exec(text))){
+      const title=mm[1].trim();
+      const href=mm[2];
+      if(title.length<=5) continue;
+      if(NAV_BLACKLIST.some(w=>title.includes(w))) continue;
+      if(!href.includes("/contsMvGllry/")) continue;
+      if(href.replace(/\/$/,"")===boardUrl.replace(/\/$/,"")) continue;
+      if(!seen.has(title)) seen.set(title,href);
+    }
+    const unique=[...seen.entries()].slice(0,5);
+    if(!unique.length) throw Error("자료 카드를 찾지 못했습니다");
+    el.innerHTML=unique.map(([title,href])=>`<a class="schoolItem" target="_blank" rel="noopener" href="${esc(href)}"><b>${esc(title)}</b><span>에듀넷 학습자료 · 바로가기 →</span></a>`).join("");
+    return;
+  }catch(e){/* 아래 수동 목록/안내 링크로 넘어감 */}
+  if(SCHOOL_CONTENT.material.length){
+    el.innerHTML=SCHOOL_CONTENT.material.slice(0,5).map(x=>`<a class="schoolItem" target="_blank" rel="noopener" href="${esc(x[1])}"><b>${esc(x[0])}</b><span>에듀넷 학습자료 · 바로가기 →</span></a>`).join("");
+    return;
+  }
+  el.innerHTML=`<a class="schoolItem" target="_blank" rel="noopener" href="${boardUrl}"><b>에듀넷 학습자료</b><span>자동 수집이 되지 않아, 목록을 직접 확인해주세요 →</span></a>`;
+}
+async function fetchLiveSchoolSchedule(){
+  try{
+    const res=await fetch("https://r.jina.ai/"+SCHOOL.schedule,{mode:"cors"});
+    if(!res.ok) throw Error();
+    const text=await res.text();
+    const curMonth=new Date().getMonth()+1;
+    const events=[];
+    text.split("\n").forEach(line=>{
+      if(!line.trim().startsWith("|")) return;
+      const cells=line.split("|").map(c=>c.trim()).filter(Boolean);
+      if(cells.length<2) return;
+      const dateCell=cells.find(c=>c.length<25 && /(\d{1,2})\s*[.\-/월]\s*(\d{1,2})?/.test(c));
+      const titleCell=cells.find(c=>c!==dateCell && c.length>=4 && !/^[-\d\s.]+$/.test(c));
+      if(!dateCell||!titleCell) return;
+      const mMatch=dateCell.match(/(\d{1,2})\s*[.\-/월]/);
+      if(!mMatch || parseInt(mMatch[1],10)!==curMonth) return;
+      if(/토요\s*휴업/.test(titleCell)) return;
+      events.push([titleCell,dateCell,SCHOOL.schedule]);
+    });
+    return events;
+  }catch(e){return []}
+}
+async function renderMonthlySchedule(){
+  const now=new Date(), y=now.getFullYear(), m=now.getMonth();
+  $("scheduleMonth").textContent=`${y}년 ${m+1}월`;
+  // 수동으로 입력한 항목 + 학교 홈페이지 '알림마당-행사일정'에서 자동으로 가져온 이달 항목을 합쳐서 표시합니다.
+  // "토요휴업일"이 제목에 포함된 항목은 자동으로 제외됩니다.
+  const manual=SCHOOL_CONTENT.schedule.filter(x=>!/토요\s*휴업/.test(x[0]));
+  const live=await fetchLiveSchoolSchedule();
+  const merged=[...manual];
+  live.forEach(x=>{ if(!merged.some(y=>y[0]===x[0])) merged.push(x) });
+  const el=$("scheduleList");
+  if(merged.length){
+    el.innerHTML=merged.map(x=>`<a class="schoolItem" target="_blank" rel="noopener" href="${x[2]||SCHOOL.schedule}"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></a>`).join("");
+  } else {
+    el.innerHTML=`<a class="schoolItem" target="_blank" rel="noopener" href="${SCHOOL.schedule}"><b>${y}년 ${m+1}월 행사일정 확인</b><span>학교 공식 월간 일정 열기 →</span></a>`;
+  }
+}
+function renderSchoolLists(){renderSchoolList("noticeList",SCHOOL_CONTENT.notice);renderSchoolList("letterList",SCHOOL_CONTENT.letter);renderMonthlySchedule()}
+function refreshSchoolLists(){renderSchoolLists();loadEdunetTrends();document.querySelectorAll(".refreshBtn").forEach(b=>{b.textContent="✓ 확인";setTimeout(()=>b.textContent="↻ 새로고침",1200)})}
+renderSchoolLists();loadEdunetTrends();loadAll();setInterval(()=>loadAll(),600000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){loadAll();renderSchoolLists();loadEdunetTrends()}});
+
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script></body></html>
