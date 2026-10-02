@@ -114,17 +114,28 @@ body::before{right:24%;top:12px}
 .schoolItem span,.item span,.sub,.liveNote,.status,.hint{font-weight:400}
 .tab,.btn,.refreshBtn{font-weight:700}
 .tools span:last-child{font-size:13px}
+.moodRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;flex:0 1 auto}
+.moodBadge{font-size:26px;background:#fff;border-radius:999px;padding:7px 20px;color:#c26a00;font-weight:700;box-shadow:0 3px 0 #ffe0a8;white-space:nowrap}
+.moodBtn{border:2px solid #ffd77a;background:#fffdf5;border-radius:999px;padding:3px 9px;font-size:10.5px;color:#b98a3a;font-weight:700;font-family:inherit;white-space:nowrap}
+.moodBtn:active{transform:translateY(2px)}
+.moodEmojiShow{font-size:52px;line-height:1}
+.emojiPicker{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:9px}
+.emojiBtn{border:2.5px solid #ffe6bf;background:#fffdf5;border-radius:14px;font-size:22px;padding:6px 0;line-height:1;transition:transform .12s,border-color .12s,background .12s}
+.emojiBtn.on{border-color:#ff7a90;background:#fff0f3;transform:scale(1.08)}
+.emojiBtn:active{transform:scale(.92)}
+@media(max-width:1050px){.student{flex-wrap:wrap;gap:10px}.moodRow{order:3;width:100%;justify-content:flex-start}}
+.lostItem{border-left-color:#ffa94d}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media(max-width:720px){h1{font-size:22px}.logo{width:50px;height:50px}}
 </style></head><body><div class="wrap">
 <header class="top"><div class="brand"><div class="logo">📚</div><div><h1>우리반 스마트 학습마당</h1><div class="sub">청미르초등학교 · 태블릿 학생용</div></div></div>
 <div class="actions"><button class="btn" onclick="openStudent()">⚙ 학생 정보</button><button class="btn primary" onclick="loadAll()">↻ 새로고침</button></div></header>
 <div class="layout"><main>
-<div class="card student"><div><strong id="studentName">학생 정보를 입력해주세요</strong><small id="studentMeta">처음 실행할 때 학년·반·번호·이름을 입력합니다.</small></div><div id="updated" class="date"></div></div>
+<div class="card student"><div><strong id="studentName">학생 정보를 입력해주세요</strong><small id="studentMeta">처음 실행할 때 학년·반·번호·이름을 입력합니다.</small></div><div class="moodRow"><span id="moodEmojiShow" class="moodEmojiShow"></span><span id="moodBadge" class="moodBadge"></span><button class="moodBtn" onclick="showMood(0)">오늘</button><button class="moodBtn" onclick="showMood(7)">일주일 전</button><button class="moodBtn" onclick="showMood(0,1)">한달 전</button></div><div id="updated" class="date"></div></div>
 <div class="cards">
 <div class="card panel"><h2>🍚 오늘·내일 급식</h2><div class="tabs"><button class="tab on" onclick="mealTab(0,this)">오늘</button><button class="tab" onclick="mealTab(1,this)">내일</button></div><div id="meal"><div class="empty">불러오는 중…</div></div></div>
 <div class="card panel"><h2>📚 오늘·내일 시간표</h2><div class="tabs"><button class="tab on" onclick="timeTab(0,this)">오늘</button><button class="tab" onclick="timeTab(1,this)">내일</button></div><div id="time"><div class="empty">불러오는 중…</div></div></div>
-<div class="card panel"><h2>📖 학습자료</h2><div id="trendList" class="schoolList"><div class="schoolItem"><b>에듀넷 학습자료</b><span>목록을 불러오는 중…</span></div></div><div class="liveNote">제목을 목록으로 표시합니다. 제목을 누르면 에듀넷 학습자료 페이지로 이동합니다.</div><a class="more" target="_blank" rel="noopener" href="https://www.edunet.net/contsMvGllry/list/152">학습자료 전체보기 →</a></div></div>
+<div class="card panel"><h2>🧢 분실물센터</h2><div id="trendList" class="schoolList"><div class="schoolItem"><b>분실물 목록</b><span>불러오는 중…</span></div></div><div class="liveNote">분실 날짜·장소·분실물을 표시합니다.</div><a class="more" target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1kGuvrLa991CT8WEyDaXwOnlJwJWBS6vr-9Z5NXb3Kx0/edit?usp=sharing">분실물 전체보기 →</a></div></div>
 <div class="sections">
 <div class="card section"><h2>📢 공지사항 <button class="refreshBtn" onclick="refreshSchoolLists()">↻ 새로고침</button></h2><div id="noticeList" class="schoolList"></div><div class="liveNote">학교 홈페이지 최신 게시글 기준 · 제목을 누르면 원문으로 이동합니다.</div><a class="more" target="_blank" rel="noopener" href="https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8645&mi=13423">공지사항 전체 보기 →</a></div>
 <div class="card section"><h2>📨 가정통신문</h2><div id="letterList" class="schoolList"></div><div class="liveNote">학교 홈페이지 최신 게시글 기준 · 제목을 누르면 원문으로 이동합니다.</div><a class="more" target="_blank" rel="noopener" href="https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8665&mi=13450">가정통신문 전체 보기 →</a></div>
@@ -132,18 +143,48 @@ body::before{right:24%;top:12px}
 <div class="card learn"><h2>🎓 바로 배우기</h2><div class="learnGrid">
 <a target="_blank" href="https://primary.ebs.co.kr/"><span class="ico">📺</span><span>EBS 초등</span></a><a target="_blank" href="https://hi.goe.go.kr/"><span class="ico">💻</span><span>하이러닝</span></a><a target="_blank" href="http://w.11math.com/"><span class="ico">➗</span><span>일일수학</span></a><a target="_blank" href="https://www.scienceall.com/"><span class="ico">🔬</span><span>사이언스올</span></a><a target="_blank" href="https://www.nlcy.go.kr/"><span class="ico">📖</span><span>국립어린이청소년도서관</span></a><a target="_blank" href="https://read365.edunet.net/"><span class="ico">📚</span><span>독서로</span></a></div></div>
 </main><aside class="card side"><h2>🧰 수업 도구</h2><div class="tools">
-<a target="_blank" href="https://www.canva.com/"><span class="ico">🎨</span><span>Canva</span></a><a target="_blank" href="https://padlet.com/"><span class="ico">🧱</span><span>Padlet</span></a><a target="_blank" href="https://www.tkbell.co.kr/"><span class="ico">🔔</span><span>띵커벨</span></a><a target="_blank" href="https://kahoot.com/"><span class="ico">❓</span><span>Kahoot</span></a><a target="_blank" href="https://www.capcut.com/"><span class="ico">🎬</span><span>CapCut</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=jp.ne.ibis.ibispaintx.app;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Djp.ne.ibis.ibispaintx.app;end"><span class="ico">🖌</span><span>ibisPaint X</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.noctuasoftware.stellarium;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fsearch%3Fq%3Dstellarium%26c%3Dapps%26hl%3Dko;end"><span class="ico">🌌</span><span>Stellarium</span></a><a target="_blank" href="https://radio.garden/"><span class="ico">🌍</span><span>Radio Garden</span></a><a target="_blank" href="https://www.blooket.com/"><span class="ico">📝</span><span>블루킷</span></a><a target="_blank" href="https://quizn.show/"><span class="ico">🧩</span><span>퀴즈앤</span></a><a target="_blank" href="https://www.cateater.com/stopmotionstudio/"><span class="ico">🎞</span><span>Stop Motion</span></a><a target="_blank" href="https://www.autodesk.com/products/tinkercad/overview"><span class="ico">⚙</span><span>Tinkercad</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.bluegreen.mce;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.bluegreen.mce%26hl%3Dko;end"><span class="ico">🎒</span><span>수페클래스</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.sec.penup;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.sec.penup;end"><span class="ico">✏️</span><span>PENUP</span></a><a target="_blank" rel="noopener" href="https://tooning.io/"><span class="ico">🎨</span><span>투닝</span></a><a target="_blank" rel="noopener" href="https://www.onlinepianist.com/virtual-piano"><span class="ico">🎹</span><span>실시간 피아노</span></a><a target="_blank" href="https://www.google.com/"><span class="ico">🌐</span><span>구글크롬</span></a><label style="cursor:pointer"><input type="file" accept="image/*" capture="environment" style="display:none" onchange="this.value=''"><span class="ico">📷</span><span>QR코드확인</span></label><a target="_blank" rel="noopener" href="https://onmusil.gyo6.net/apps/thread/fLKVLMwf"><span class="ico">🌱</span><span>온실이</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=kr.go.goe.gaide.mobile;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dkr.go.goe.gaide.mobile%26hl%3Dko%26pli%3D1;end"><span class="ico">🙋</span><span>지원이</span></a></div>
+<a target="_blank" href="https://www.canva.com/"><span class="ico">🎨</span><span>Canva</span></a><a target="_blank" href="https://padlet.com/"><span class="ico">🧱</span><span>Padlet</span></a><a target="_blank" href="https://www.tkbell.co.kr/"><span class="ico">🔔</span><span>띵커벨</span></a><a target="_blank" href="https://kahoot.com/"><span class="ico">❓</span><span>Kahoot</span></a><a target="_blank" href="https://www.capcut.com/"><span class="ico">🎬</span><span>CapCut</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=jp.ne.ibis.ibispaintx.app;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Djp.ne.ibis.ibispaintx.app;end"><span class="ico">🖌</span><span>ibisPaint X</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.noctuasoftware.stellarium;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fsearch%3Fq%3Dstellarium%26c%3Dapps%26hl%3Dko;end"><span class="ico">🌌</span><span>Stellarium</span></a><a target="_blank" href="https://radio.garden/"><span class="ico">🌍</span><span>Radio Garden</span></a><a target="_blank" href="https://www.blooket.com/"><span class="ico">📝</span><span>블루킷</span></a><a target="_blank" href="https://quizn.show/"><span class="ico">🧩</span><span>퀴즈앤</span></a><a target="_blank" href="https://www.cateater.com/stopmotionstudio/"><span class="ico">🎞</span><span>Stop Motion</span></a><a target="_blank" href="https://www.algeomath.kr/"><span class="ico">📐</span><span>알지오매스</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.bluegreen.mce;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.bluegreen.mce%26hl%3Dko;end"><span class="ico">🎒</span><span>수페클래스</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.sec.penup;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.sec.penup;end"><span class="ico">✏️</span><span>PENUP</span></a><a target="_blank" rel="noopener" href="https://tooning.io/"><span class="ico">🎨</span><span>투닝</span></a><a target="_blank" rel="noopener" href="https://www.onlinepianist.com/virtual-piano"><span class="ico">🎹</span><span>실시간 피아노</span></a><a target="_blank" href="https://www.google.com/"><span class="ico">🌐</span><span>구글크롬</span></a><label style="cursor:pointer"><input type="file" accept="image/*" capture="environment" style="display:none" onchange="this.value=''"><span class="ico">📷</span><span>QR코드확인</span></label><a target="_blank" rel="noopener" href="https://onmusil.gyo6.net/apps/thread/fLKVLMwf"><span class="ico">🌱</span><span>온실이</span></a><a href="intent://#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=kr.go.goe.gaide.mobile;S.browser_fallback_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dkr.go.goe.gaide.mobile%26hl%3Dko%26pli%3D1;end"><span class="ico">🙋</span><span>지원이</span></a></div>
 <div class="hint">📱 태블릿 홈 화면에 추가하면 앱처럼 사용할 수 있습니다.<br>학교 홈페이지의 최신 공지·가정통신문·일정을 카드로 확인합니다.<br>학생 정보는 이 태블릿의 브라우저에 저장됩니다.<br>다른 학생이 사용하면 ⚙ 학생 정보에서 변경하세요.</div></aside></div>
 <div class="foot">청미르초등학교 · 우리반 스마트 학습마당 · by willard.au</div></div>
-<div id="modal" class="modal"><div class="dialog"><h2>👋 학생 정보 입력</h2><p>이 태블릿을 사용하는 학생 정보를 입력하세요. 한 번 저장하면 다음 실행부터 자동으로 표시됩니다.</p><div class="form"><div class="field"><label>학년</label><input id="grade" type="number" min="1" max="6" placeholder="5"></div><div class="field"><label>반</label><input id="classNo" type="number" min="1" max="99" placeholder="3"></div><div class="field"><label>번호</label><input id="studentNo" type="number" min="1" max="99" placeholder="12"></div><div class="field full"><label>이름</label><input id="name" maxlength="20" placeholder="홍길동"></div></div><button class="save" onclick="saveStudent()">저장하고 시작하기</button></div></div>
+<div id="modal" class="modal"><div class="dialog"><h2>👋 학생 정보 입력</h2><p>이 태블릿을 사용하는 학생 정보를 입력하세요. 한 번 저장하면 다음 실행부터 자동으로 표시됩니다.</p><div class="form"><div class="field"><label>학년</label><input id="grade" type="number" min="1" max="6" placeholder="5"></div><div class="field"><label>반</label><input id="classNo" type="number" min="1" max="99" placeholder="3"></div><div class="field"><label>번호</label><input id="studentNo" type="number" min="1" max="99" placeholder="12"></div><div class="field full"><label>이름</label><input id="name" maxlength="20" placeholder="홍길동"></div><div class="field full"><label>오늘의 기분</label><input id="mood" maxlength="40" placeholder="오늘 기분이 어때요?"><input type="hidden" id="moodEmoji" value="">
+<div class="emojiPicker">
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😀</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😊</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😄</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">🥳</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😐</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😴</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😰</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😞</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😢</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😭</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😡</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">🤒</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">😎</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">🤩</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">🥶</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">💀</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">👽</button>
+<button type="button" class="emojiBtn" onclick="pickMoodEmoji(this)">🤖</button>
+</div></div></div><button class="save" onclick="saveStudent()">저장하고 시작하기</button></div></div>
 <script>
 const SCHOOL={name:"청미르초등학교",educationOfficeCode:"J10",schoolCode:"7681234",home:"https://cheongmireu-e.goepj.kr/cheongmireu-e/main.do",notice:"https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8645&mi=13423",letter:"https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8665&mi=13450",schedule:"https://cheongmireu-e.goepj.kr/cheongmireu-e/ps/schdul/selectSchdulMainList.do?mi=13452",mealBoard:"https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8667&mi=13455"};
 const NEIS_KEYS=["16aaf7cd96564fa984c1a4c23c2e27f8","8c3c2473f463471abacc0ce8e19c1215"];let student=JSON.parse(localStorage.getItem("classStudent")||"null"),meals=[[],[]],times=[[],[]],lastNeisError="";const $=id=>document.getElementById(id);
 function ymd(n=0){let d=new Date();d.setDate(d.getDate()+n);return d.toISOString().slice(0,10).replaceAll("-","")}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-function openStudent(){if(student){$("grade").value=student.grade;$("classNo").value=student.classNo;$("studentNo").value=student.studentNo;$("name").value=student.name}$("modal").classList.add("show")}
-function saveStudent(){let grade=$("grade").value.trim(),classNo=$("classNo").value.trim(),studentNo=$("studentNo").value.trim(),name=$("name").value.trim();if(!grade||!classNo||!studentNo||!name){alert("모든 항목을 입력해주세요.");return}student={grade,classNo,studentNo,name};localStorage.setItem("classStudent",JSON.stringify(student));$("modal").classList.remove("show");renderStudent();loadAll()}
-function renderStudent(){if(!student){$("studentName").textContent="학생 정보를 입력해주세요";$("studentMeta").textContent="처음 실행할 때 학년·반·번호·이름을 입력합니다.";openStudent();return}$("studentName").textContent=`${student.grade}학년 ${student.classNo}반 ${student.name}`;$("studentMeta").textContent=`${student.studentNo}번 · ${SCHOOL.name}`}
+function openStudent(){if(student){$("grade").value=student.grade;$("classNo").value=student.classNo;$("studentNo").value=student.studentNo;$("name").value=student.name}
+let today=moodEntry(getMoodLog()[todayKey()]);$("mood").value=today.mood;$("moodEmoji").value=today.emoji;
+document.querySelectorAll(".emojiBtn").forEach(b=>b.classList.toggle("on",b.textContent===today.emoji));
+$("modal").classList.add("show")}
+function pickMoodEmoji(btn){let already=btn.classList.contains("on");document.querySelectorAll(".emojiBtn").forEach(b=>b.classList.remove("on"));if(!already){btn.classList.add("on");$("moodEmoji").value=btn.textContent}else{$("moodEmoji").value=""}}
+function dateKeyOf(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function todayKey(){return dateKeyOf(new Date())}
+function getMoodLog(){try{return JSON.parse(localStorage.getItem("moodLog")||"{}")}catch(e){return{}}}
+function moodEntry(v){if(!v)return{mood:"",emoji:""};if(typeof v==="string")return{mood:v,emoji:""};return{mood:v.mood||"",emoji:v.emoji||""}}
+function saveMood(text,emoji){let log=getMoodLog();if(text||emoji)log[todayKey()]={mood:text,emoji:emoji};localStorage.setItem("moodLog",JSON.stringify(log))}
+function showMood(days,months){let d=new Date();if(months)d.setMonth(d.getMonth()-months);if(days)d.setDate(d.getDate()-days);let key=dateKeyOf(d),label=d.toLocaleDateString("ko-KR",{month:"numeric",day:"numeric"}),e=moodEntry(getMoodLog()[key]);$("moodBadge").textContent=e.mood||e.emoji?`${label} 기분 · ${e.mood}`:`${label} 기록 없음`;$("moodEmojiShow").textContent=e.emoji||""}
+function saveStudent(){let grade=$("grade").value.trim(),classNo=$("classNo").value.trim(),studentNo=$("studentNo").value.trim(),name=$("name").value.trim();if(!grade||!classNo||!studentNo||!name){alert("모든 항목을 입력해주세요.");return}student={grade,classNo,studentNo,name};localStorage.setItem("classStudent",JSON.stringify(student));saveMood($("mood").value.trim(),$("moodEmoji").value);$("modal").classList.remove("show");renderStudent();loadAll()}
+function renderStudent(){if(!student){$("studentName").textContent="학생 정보를 입력해주세요";$("studentMeta").textContent="처음 실행할 때 학년·반·번호·이름을 입력합니다.";openStudent();return}$("studentName").textContent=`${student.grade}학년 ${student.classNo}반 ${student.name}`;$("studentMeta").textContent=`${student.studentNo}번 · ${SCHOOL.name}`;showMood(0)}
 async function neis(path,p){let lastErr;for(const key of NEIS_KEYS){try{let u=new URL("https://open.neis.go.kr/hub/"+path);u.searchParams.set("KEY",key);u.searchParams.set("Type","json");u.searchParams.set("pIndex","1");u.searchParams.set("pSize","100");Object.entries(p).forEach(([k,v])=>u.searchParams.set(k,v));let r;try{r=await fetch(u)}catch(netErr){throw Error("CORS_OR_NETWORK")}if(!r.ok)throw Error("HTTP_"+r.status);let d=await r.json();const topCode=d?.RESULT?.CODE;if(topCode&&topCode.startsWith("ERROR"))throw Error(topCode+" "+(d.RESULT.MESSAGE||""));return d}catch(e){lastErr=e;continue}}throw lastErr||Error("NEIS 조회 실패")}
 function rows(d,k){return Array.isArray(d?.[k])&&d[k][1]?.row?d[k][1].row:[]}
 function semOf(d){const m=d.getMonth()+1;return m>=3&&m<=8?"1":"2"}
@@ -153,7 +194,7 @@ async function loadNeis(){if(!NEIS_KEYS.length){meals=[demoMeal(0),demoMeal(1)];
 function renderDish(line){const m=line.match(/^(.*?)\s*\(([\d.\s]+)\)\s*$/);if(m)return `<div class="dish"><span class="dish-name">${esc(m[1].trim())}</span><span class="dish-allergy">${esc(m[2].trim())}</span></div>`;return `<div class="dish"><span class="dish-name">${esc(line)}</span></div>`}
 function mealTab(i,b){b.parentElement.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");let r=meals[i]||[];$("meal").innerHTML=r.length?r.map(x=>{const lines=String(x.DDISH_NM||"").split(/<br\s*\/?>/i).map(s=>s.trim()).filter(Boolean);return `<div class="menu">${lines.map(renderDish).join("")}</div>${x.CAL_INFO?`<div class="status">${esc(x.CAL_INFO)}</div>`:""}`}).join(""):`<div class="empty">등록된 급식 정보가 없습니다.${lastNeisError?`<br><span style="color:#c0392b">${esc(lastNeisError)}</span>`:""}</div>`}
 function timeTab(i,b){b.parentElement.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));b.classList.add("on");let r=times[i]||[];$("time").innerHTML=r.length?r.sort((a,b)=>+a.PERIO-+b.PERIO).map(x=>`<div class="period"><span class="num">${esc(x.PERIO)}</span><span class="subj">${esc(x.ITRT_CNTNT)}</span></div>`).join(""):`<div class="empty">등록된 시간표가 없습니다.${lastNeisError?`<br><span style="color:#c0392b">${esc(lastNeisError)}</span>`:""}</div>`}
-async function loadAll(){renderStudent();if(!student)return;await loadNeis();mealTab(0,$("#meal").parentElement.querySelector(".tab"));timeTab(0,$("#time").parentElement.querySelector(".tab"))}
+async function loadAll(){renderStudent();if(!student)return;await loadNeis();mealTab(0,$("meal").parentElement.querySelector(".tab"));timeTab(0,$("time").parentElement.querySelector(".tab"))}
 const SCHOOL_CONTENT={
  notice:[
   ["2026학년도 2차 도서 구입 예정 목록","2026.09.07","https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttInfo.do?bbsId=8645&mi=13423"],
@@ -176,39 +217,52 @@ const SCHOOL_CONTENT={
  ]
 };
 function renderSchoolList(id,items){const el=$(id);el.innerHTML=items.map(x=>`<a class="schoolItem" target="_blank" rel="noopener" href="${x[2]}"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></a>`).join("")}
-
-async function loadEdunetTrends(){
-  const el=$("trendList");
-  const boardUrl="https://www.edunet.net/contsMvGllry/list/152";
-  const NAV_BLACKLIST=["바로가기","외부링크","페이스북","트위터","인스타그램","유튜브","카카오","네이버","로그인","회원가입","아이디","비밀번호","사이트맵","전체메뉴","검색결과","디지털교과서","모두의한국어","이용약관","개인정보","고객센터","찾아오시는","패밀리사이트","즐겨찾기","공지사항","자주찾는","새창","홈으로","상단으로","맨위로"];
+async function fetchLiveBoard(mi,bbsId,count){
+  const listUrl=`https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?mi=${mi}&bbsId=${bbsId}`;
   try{
-    // 이 사이트는 자바스크립트로 카드를 그리는 페이지라 일반 fetch로는 읽을 수 없어,
-    // 페이지를 렌더링해 텍스트로 변환해주는 공개 리더(r.jina.ai)를 통해 시도합니다.
-    const response=await fetch("https://r.jina.ai/"+boardUrl,{mode:"cors"});
-    if(!response.ok) throw Error("리더 응답 오류");
-    const text=await response.text();
-    const linkRe=/\[([^\]]{6,})\]\((https?:\/\/[^\s)]*edunet\.net[^\s)]*)\)/g;
-    const seen=new Map();
-    let mm;
-    while((mm=linkRe.exec(text))){
-      const title=mm[1].trim();
-      const href=mm[2];
-      if(title.length<=5) continue;
-      if(NAV_BLACKLIST.some(w=>title.includes(w))) continue;
-      if(!href.includes("/contsMvGllry/")) continue;
-      if(href.replace(/\/$/,"")===boardUrl.replace(/\/$/,"")) continue;
-      if(!seen.has(title)) seen.set(title,href);
-    }
-    const unique=[...seen.entries()].slice(0,5);
-    if(!unique.length) throw Error("자료 카드를 찾지 못했습니다");
-    el.innerHTML=unique.map(([title,href])=>`<a class="schoolItem" target="_blank" rel="noopener" href="${esc(href)}"><b>${esc(title)}</b><span>에듀넷 학습자료 · 바로가기 →</span></a>`).join("");
-    return;
-  }catch(e){/* 아래 수동 목록/안내 링크로 넘어감 */}
-  if(SCHOOL_CONTENT.material.length){
-    el.innerHTML=SCHOOL_CONTENT.material.slice(0,5).map(x=>`<a class="schoolItem" target="_blank" rel="noopener" href="${esc(x[1])}"><b>${esc(x[0])}</b><span>에듀넷 학습자료 · 바로가기 →</span></a>`).join("");
-    return;
+    const res=await fetch("https://r.jina.ai/"+listUrl,{mode:"cors"});
+    if(!res.ok) throw Error();
+    const text=await res.text();
+    const NAV=["바로가기","로그인","회원가입","사이트맵","전체메뉴","목록","첨부파일","인쇄하기","이전글","다음글","새창","홈으로","검색결과"];
+    const items=[];
+    const seen=new Set();
+    text.split("\n").forEach(line=>{
+      const m=line.match(/\[([^\]]{6,})\]\((https?:\/\/[^\s)]*selectNttInfo\.do[^\s)]*)\)/);
+      if(!m) return;
+      const title=m[1].trim(), href=m[2];
+      if(NAV.some(w=>title.includes(w))) return;
+      if(!href.includes("bbsId="+bbsId)) return;
+      if(seen.has(title)) return;
+      seen.add(title);
+      const dateMatch=line.match(/(20\d{2}[.\-]\d{1,2}[.\-]\d{1,2}|\d{1,2}[.\-]\d{1,2}[.\-]\d{1,2})/);
+      items.push([title,dateMatch?dateMatch[1]:"",href]);
+    });
+    return items.slice(0,count||5);
+  }catch(e){ return [] }
+}
+async function renderLiveBoard(id,mi,bbsId,manual,count){
+  const live=await fetchLiveBoard(mi,bbsId,count);
+  const merged=live.length?live:manual;
+  // 수동으로 적어둔 항목 중 자동으로 가져온 것과 제목이 겹치지 않는 것만 뒤에 덧붙입니다.
+  manual.forEach(x=>{ if(merged.length<(count||5) && !merged.some(y=>y[0]===x[0])) merged.push(x) });
+  renderSchoolList(id,merged.slice(0,count||5));
+}
+
+function parseCsvLine(line){const out=[];let cur="",q=false;for(let i=0;i<line.length;i++){const c=line[i];if(q){if(c==='"'){if(line[i+1]==='"'){cur+='"';i++}else q=false}else cur+=c}else{if(c==='"')q=true;else if(c===','){out.push(cur);cur=""}else cur+=c}}out.push(cur);return out}
+async function loadLostFound(){
+  const el=$("trendList");
+  const sheetId="1kGuvrLa991CT8WEyDaXwOnlJwJWBS6vr-9Z5NXb3Kx0";
+  const viewUrl="https://docs.google.com/spreadsheets/d/"+sheetId+"/edit?usp=sharing";
+  const apiUrl="https://script.google.com/macros/s/AKfycbwMQtZIJ-zXP4Q-WbJpcAhV2jHX3PgHcMK5H4a8OXUzf7mZ9MIGIgnsOdHkefBHVWNa/exec";
+  try{
+    const res=await fetch(apiUrl);
+    if(!res.ok) throw Error("응답 오류");
+    const items=(await res.json()).map(x=>({date:(x.date||"").trim(),place:(x.place||"").trim(),item:(x.item||x.name||"").trim()})).filter(x=>x.date||x.place||x.item).slice(-4);
+    if(!items.length){ el.innerHTML='<div class="schoolItem"><b>분실물이 없습니다</b><span>등록된 분실물이 없어요 →</span></div>'; return; }
+    el.innerHTML=items.map(x=>`<div class="schoolItem lostItem"><b>${esc(x.item||"물건 미상")}</b><span>${esc(x.date)} · ${esc(x.place)}</span></div>`).join("");
+  }catch(e){
+    el.innerHTML=`<a class="schoolItem" target="_blank" rel="noopener" href="${viewUrl}"><b>분실물센터</b><span>자동 불러오기가 되지 않아, 시트에서 직접 확인해주세요 →</span></a>`;
   }
-  el.innerHTML=`<a class="schoolItem" target="_blank" rel="noopener" href="${boardUrl}"><b>에듀넷 학습자료</b><span>자동 수집이 되지 않아, 목록을 직접 확인해주세요 →</span></a>`;
 }
 async function fetchLiveSchoolSchedule(){
   try{
@@ -248,10 +302,15 @@ async function renderMonthlySchedule(){
     el.innerHTML=`<a class="schoolItem" target="_blank" rel="noopener" href="${SCHOOL.schedule}"><b>${y}년 ${m+1}월 행사일정 확인</b><span>학교 공식 월간 일정 열기 →</span></a>`;
   }
 }
-function renderSchoolLists(){renderSchoolList("noticeList",SCHOOL_CONTENT.notice);renderSchoolList("letterList",SCHOOL_CONTENT.letter);renderMonthlySchedule()}
-function refreshSchoolLists(){renderSchoolLists();loadEdunetTrends();document.querySelectorAll(".refreshBtn").forEach(b=>{b.textContent="✓ 확인";setTimeout(()=>b.textContent="↻ 새로고침",1200)})}
-renderSchoolLists();loadEdunetTrends();loadAll();setInterval(()=>loadAll(),600000);
-document.addEventListener("visibilitychange",()=>{if(!document.hidden){loadAll();renderSchoolLists();loadEdunetTrends()}});
+function renderSchoolLists(){
+  renderSchoolList("noticeList",SCHOOL_CONTENT.notice);renderSchoolList("letterList",SCHOOL_CONTENT.letter); // 불러오는 동안 임시로 보여줄 내용
+  renderLiveBoard("noticeList",13423,8645,SCHOOL_CONTENT.notice,3);
+  renderLiveBoard("letterList",13450,8665,SCHOOL_CONTENT.letter,3);
+  renderMonthlySchedule();
+}
+function refreshSchoolLists(){renderSchoolLists();loadLostFound();document.querySelectorAll(".refreshBtn").forEach(b=>{b.textContent="✓ 확인";setTimeout(()=>b.textContent="↻ 새로고침",1200)})}
+renderSchoolLists();loadLostFound();loadAll();setInterval(()=>loadAll(),600000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden){loadAll();renderSchoolLists();loadLostFound()}});
 
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script></body></html>
