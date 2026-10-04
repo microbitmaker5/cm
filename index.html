@@ -135,7 +135,7 @@ body::before{right:24%;top:12px}
 <div class="cards">
 <div class="card panel"><h2>🍚 오늘·내일 급식</h2><div class="tabs"><button class="tab on" onclick="mealTab(0,this)">오늘</button><button class="tab" onclick="mealTab(1,this)">내일</button></div><div id="meal"><div class="empty">불러오는 중…</div></div></div>
 <div class="card panel"><h2>📚 오늘·내일 시간표</h2><div class="tabs"><button class="tab on" onclick="timeTab(0,this)">오늘</button><button class="tab" onclick="timeTab(1,this)">내일</button></div><div id="time"><div class="empty">불러오는 중…</div></div></div>
-<div class="card panel"><h2>🧢 분실물센터</h2><div id="trendList" class="schoolList"><div class="schoolItem"><b>분실물 목록</b><span>불러오는 중…</span></div></div><div class="liveNote">분실 날짜·장소·분실물을 표시합니다.</div><a class="more" target="_blank" rel="noopener" href="https://microbitmaker5.github.io/cm_lost/">분실물 전체보기 →</a></div></div>
+<div class="card panel"><h2>🧢 분실물센터</h2><div id="trendList" class="schoolList"><div class="schoolItem"><b>분실물 목록</b><span>불러오는 중…</span></div></div><div class="liveNote">분실 날짜·장소·분실물을 표시합니다.</div><a class="more" target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1kGuvrLa991CT8WEyDaXwOnlJwJWBS6vr-9Z5NXb3Kx0/edit?usp=sharing">분실물 전체보기 →</a></div></div>
 <div class="sections">
 <div class="card section"><h2>📢 공지사항 <button class="refreshBtn" onclick="refreshSchoolLists()">↻ 새로고침</button></h2><div id="noticeList" class="schoolList"></div><div class="liveNote">학교 홈페이지 최신 게시글 기준 · 제목을 누르면 원문으로 이동합니다.</div><a class="more" target="_blank" rel="noopener" href="https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8645&mi=13423">공지사항 전체 보기 →</a></div>
 <div class="card section"><h2>📨 가정통신문</h2><div id="letterList" class="schoolList"></div><div class="liveNote">학교 홈페이지 최신 게시글 기준 · 제목을 누르면 원문으로 이동합니다.</div><a class="more" target="_blank" rel="noopener" href="https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?bbsId=8665&mi=13450">가정통신문 전체 보기 →</a></div>
@@ -218,26 +218,24 @@ const SCHOOL_CONTENT={
 };
 function renderSchoolList(id,items){const el=$(id);el.innerHTML=items.map(x=>`<a class="schoolItem" target="_blank" rel="noopener" href="${x[2]}"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></a>`).join("")}
 async function fetchLiveBoard(mi,bbsId,count){
+  // 게시판 목록 페이지는 제목이 javascript: 링크라 직접 못 읽어와서, 학교 홈페이지가 제공하는 RSS 피드를 대신 사용합니다.
+  const rssUrl=`https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectRssFeed.do?mi=${mi}&bbsId=${bbsId}`;
   const listUrl=`https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttList.do?mi=${mi}&bbsId=${bbsId}`;
   try{
-    const res=await fetch("https://r.jina.ai/"+listUrl,{mode:"cors"});
+    const res=await fetch("https://api.allorigins.win/raw?url="+encodeURIComponent(rssUrl));
     if(!res.ok) throw Error();
-    const text=await res.text();
-    const NAV=["바로가기","로그인","회원가입","사이트맵","전체메뉴","목록","첨부파일","인쇄하기","이전글","다음글","새창","홈으로","검색결과"];
-    const items=[];
-    const seen=new Set();
-    text.split("\n").forEach(line=>{
-      const m=line.match(/\[([^\]]{6,})\]\((https?:\/\/[^\s)]*selectNttInfo\.do[^\s)]*)\)/);
-      if(!m) return;
-      const title=m[1].trim(), href=m[2];
-      if(NAV.some(w=>title.includes(w))) return;
-      if(!href.includes("bbsId="+bbsId)) return;
-      if(seen.has(title)) return;
-      seen.add(title);
-      const dateMatch=line.match(/(20\d{2}[.\-]\d{1,2}[.\-]\d{1,2}|\d{1,2}[.\-]\d{1,2}[.\-]\d{1,2})/);
-      items.push([title,dateMatch?dateMatch[1]:"",href]);
-    });
-    return items.slice(0,count||5);
+    const xmlText=await res.text();
+    const doc=new DOMParser().parseFromString(xmlText,"text/xml");
+    if(doc.querySelector("parsererror")) throw Error();
+    const items=[...doc.querySelectorAll("item")].slice(0,count||5).map(it=>{
+      const title=(it.querySelector("title")?.textContent||"").trim();
+      let link=(it.querySelector("link")?.textContent||"").trim();
+      if(link && !/^https?:\/\//.test(link)) link="https://cheongmireu-e.goepj.kr"+link;
+      const pub=(it.querySelector("pubDate")?.textContent||"").trim();
+      const date=pub?pub.slice(0,10).replace(/-/g,"."):"";
+      return [title,date,link||listUrl];
+    }).filter(x=>x[0]);
+    return items;
   }catch(e){ return [] }
 }
 async function renderLiveBoard(id,mi,bbsId,manual,count){
