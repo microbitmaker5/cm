@@ -17,7 +17,7 @@ button,input{font:inherit}.wrap{max-width:1450px;margin:auto;padding:18px}.top{d
 .modal{display:none;position:fixed;inset:0;background:#11182788;z-index:50;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.dialog{width:min(430px,100%);background:#fff;border-radius:22px;padding:23px;box-shadow:0 25px 80px #0003}.dialog h2{margin:0 0 5px}.dialog p{font-size:12px;color:#7a8392;line-height:1.6}.form{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:11px;color:#737c8c}.field input{padding:11px;border:1px solid #dfe3eb;border-radius:10px;outline:0}.save{width:100%;border:0;background:#5b5ce2;color:#fff;border-radius:11px;padding:12px;margin-top:13px;font-weight:700}
 @media(max-width:1050px){.layout{grid-template-columns:1fr}.side{position:static}}@media(max-width:720px){.wrap{padding:9px}.cards,.sections{grid-template-columns:1fr}.learnGrid{grid-template-columns:repeat(2,1fr)}.actions .btn:first-child{display:none}.student strong{font-size:17px}}
 
-/* ===== 초등학생용 귀여운 테마 (디자인만 변경) ===== */
+/* ===== 초등학생용 테마 (디자인만 변경_내스타일은 아니지만 우선 적용하고 의견들어보고 변경_7차변경 완료) ===== */
 :root{--ink:#3a2d4d;--muted:#8a7ba0}
 html{-webkit-tap-highlight-color:transparent}
 body{font-family:"NanumSquareRound","Gowun Dodum","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;color:var(--ink);background-color:#fff8e7;
@@ -98,7 +98,7 @@ h1{font-size:26px;font-weight:800;color:#ff5c7a;text-shadow:2px 2px 0 #ffe0e6}
 .hint{background:#fff6cf;border:2px dashed #ffc93c;border-radius:18px;color:#a67a1c;font-size:12px}
 .foot{color:#b3a6c5;font-size:12px}
 
-/* 학생 정보 창 */
+/* 학생 정보 창_개인정보 보안으로 태블릿내에서만 저장하고 외부에서는 접근안된게한다. 기분이랑 이모지콘도 같이 저장 */
 .modal{background:#3a2d4d99}
 .dialog{border:4px solid #ffc93c;border-radius:30px;box-shadow:0 9px 0 #ffc93c}
 .dialog h2{font-size:26px;font-weight:800;color:#ff5c7a}
@@ -114,7 +114,7 @@ body::before{right:24%;top:12px}
 .tools span:last-child{font-size:13.5px;overflow-wrap:normal;word-break:keep-all}
 @media(max-width:1050px){.layout{grid-template-columns:1fr}}
 
-/* 글씨체 가독성 보정 (둥근 고딕) */
+/* 글씨체 가독성 보정 (둥근 고딕_15번째 확인변경 이게 제일나음) */
 .dish-name,.schoolItem b,.learnGrid span:last-child,.tools span:last-child{font-weight:700}
 .dish{font-size:15.5px}.period{font-size:15.5px}.schoolItem b{font-size:14.5px}
 .schoolItem span,.item span,.sub,.liveNote,.status,.hint{font-weight:400}
@@ -214,6 +214,7 @@ const SCHOOL_CONTENT={
   ["학생생활규정 개정 안내문","2026.07.22","https://cheongmireu-e.goepj.kr/cheongmireu-e/na/ntt/selectNttInfo.do?bbsId=8665&mi=13450"]
  ],
  material:[
+  // 교육청 인증키 변경이나 openapi변경되면 수동으로 아래의 내용을 넣어서 적용가능함
   // 아래 형식으로 제목·링크를 채워주시면 학습자료 카드에 그대로 표시됩니다 (최대 5개).
   // ["카드 제목","https://www.edunet.net/... 개별 링크"],
  ],
